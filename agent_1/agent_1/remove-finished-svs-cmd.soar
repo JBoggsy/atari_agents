@@ -1,0 +1,20 @@
+sp {agent_1*propose*remove-finished-svs-cmd
+   (state <s> ^name agent_1
+              ^svs.command <cmd-link>)
+   (<cmd-link> ^<cmd-name> <cmd>)
+   (<cmd> ^status success)
+-->
+   (<s> ^operator <op> + >)
+   (<op> ^name remove-finished-svs-cmd)
+}
+
+sp {apply*remove-finished-svs-cmd
+   (state <s> ^operator <op>
+              ^svs.command <cmd-link>)
+   (<cmd-link> ^<cmd-name> <cmd>)
+   (<cmd> ^status success)
+   (<op> ^name remove-finished-svs-cmd)
+-->
+   (<cmd-link> ^<cmd-name> <cmd> -)
+}
+

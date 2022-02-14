@@ -1,0 +1,15 @@
+sp {propose*initialize-agent_1
+   (state <s> ^superstate nil
+             -^name)
+-->
+   (<s> ^operator <o> +)
+   (<o> ^name initialize-agent_1)
+}
+
+sp {apply*initialize-agent_1
+   (state <s> ^operator <op>)
+   (<op> ^name initialize-agent_1)
+-->
+   (<s> ^name agent_1)
+}
+

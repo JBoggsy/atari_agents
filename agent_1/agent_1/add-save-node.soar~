@@ -1,0 +1,26 @@
+sp {agent_1*propose*add-save-node
+   (state <s> ^name agent_1
+              ^svs.vsm.vog <vog>)
+   (<vog> ^node <tgt-node>)
+   (<tgt-node> ^op-name <> save-to-file
+               ^node-id <tgt-id>)
+ -{(<vog> ^node <new-node>)
+   (<new-node> ^op-name save-to-file
+               ^target <tgt-id>)}
+-->
+   (<s> ^operator <op> + =)
+   (<op> ^name add-save-node
+         ^target <tgt-id>)
+}
+
+sp {apply*add-save-node
+   (state <s> ^operator <op>
+              ^svs.command <cmd-link>)
+   (<op> ^name add-save-node
+         ^target <tgt-id>)
+-->
+   (<cmd-link> ^add-vop-node <add-vop>)
+   (<add-vop> ^op-type save-to-file
+              ^target <tgt-id>
+              ^filepath (concat |node-| <tgt-id> |-image.png|))
+}

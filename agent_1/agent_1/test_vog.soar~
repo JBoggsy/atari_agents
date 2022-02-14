@@ -1,0 +1,18 @@
+sp {agent_1*propose*test_vog
+   (state <s> ^name agent_1
+             -^testing true
+              ^svs.vsm.vops <vops>)
+-->
+   (<s> ^operator <op> + =)
+   (<op> ^name test_vog)
+}
+
+sp {apply*test_vog
+   (state <s> ^operator <op>
+              ^svs.command <cmd>)
+   (<op> ^name test_vog)
+-->
+   (<s> ^testing true)
+   (<cmd> ^add-vop-nope <add-node-1>)
+   (<add-node-1> ^op-name get-from-vsm)
+}

@@ -1,0 +1,3 @@
+pushd agent_1
+source agent_1_source.soar
+popd
