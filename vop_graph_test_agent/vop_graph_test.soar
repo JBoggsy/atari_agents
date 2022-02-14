@@ -1,0 +1,3 @@
+pushd vop_graph_test
+source vop_graph_test_source.soar
+popd

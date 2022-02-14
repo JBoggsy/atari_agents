@@ -1,0 +1,88 @@
+sp {vop_graph_test*propose*step-1
+   (state <s> ^name vop_graph_test
+             -^step1 <s1-state>)
+-->
+   (<s> ^operator <op> + =)
+   (<op> ^name step-1)
+}
+
+sp {apply*step-1
+   (state <s> ^operator <op>
+              ^svs.command <cmd-link>)
+   (<op> ^name step-1)
+-->
+   (<s> ^step1 complete)
+   (<cmd-link> ^add-vop-node <add-vop-node-cmd>)
+   (<add-vop-node-cmd> ^op-type get-from-vsm)
+}
+
+
+
+sp {vop_graph_test*propose*step-2
+   (state <s> ^name vop_graph_test
+              ^step1 complete
+             -^step2 <s2-state>)
+-->
+   (<s> ^operator <op> + =)
+   (<op> ^name step-2)
+}
+
+sp {apply*step-2
+   (state <s> ^operator <op>
+              ^svs.command <cmd-link>)
+   (<op> ^name step-2)
+-->
+   (<s> ^step2 complete)
+   (<cmd-link> ^add-vop-node <add-vop-node-cmd>)
+   (<add-vop-node-cmd> ^op-type save-to-file
+                       ^target 0
+                       ^filepath |node_0_image.png|)
+}
+
+
+
+sp {vop_graph_test*propose*step-3
+   (state <s> ^name vop_graph_test
+              ^step1 complete
+              ^step2 complete
+             -^step3 <s3-state>)
+-->
+   (<s> ^operator <op> + =)
+   (<op> ^name step-3)
+}
+
+sp {apply*step-3
+   (state <s> ^operator <op>
+              ^svs.command <cmd-link>)
+   (<op> ^name step-3)
+-->
+   (<s> ^step3 complete)
+   (<cmd-link> ^add-vop-node <add-vop-node-cmd>)
+   (<add-vop-node-cmd> ^op-type greyscale
+                       ^target 0)
+}
+
+
+
+sp {vop_graph_test*propose*step-4
+   (state <s> ^name vop_graph_test
+              ^step1 complete
+              ^step2 complete
+              ^step3 complete
+             -^step4 <s4-state>)
+-->
+   (<s> ^operator <op> + =)
+   (<op> ^name step-4)
+}
+
+sp {apply*step-4
+   (state <s> ^operator <op>
+              ^svs.command <cmd-link>)
+   (<op> ^name step-4)
+-->
+   (<s> ^step4 complete)
+   (<cmd-link> ^add-vop-node <add-vop-node-cmd>)
+   (<add-vop-node-cmd> ^op-type save-to-file
+                       ^target 2
+                       ^filepath |node_2_image.png|)
+}

@@ -1,0 +1,20 @@
+sp {vop_graph_test*propose*remove-svs-command
+   (state <s> ^name vop_graph_test
+              ^svs <svs>)
+   (<svs> ^command.<cmd-name> <svs-cmd>)
+   (<svs-cmd> ^status success)
+-->
+   (<s> ^operator <op> + >)
+   (<op> ^name remove-svs-command)
+}
+
+sp {apply*remove-svs-command
+   (state <s> ^operator <op>
+              ^svs <svs>)
+   (<svs> ^command <cmd-link>)
+   (<cmd-link> ^<cmd-name> <cmd>)
+   (<cmd> ^status success)
+   (<op> ^name remove-svs-command)
+-->
+   (<cmd-link> ^<cmd-name> <cmd> -)
+}

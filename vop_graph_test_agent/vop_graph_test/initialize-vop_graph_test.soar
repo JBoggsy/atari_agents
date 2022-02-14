@@ -1,0 +1,15 @@
+sp {propose*initialize-vop_graph_test
+   (state <s> ^superstate nil
+             -^name)
+-->
+   (<s> ^operator <o> +)
+   (<o> ^name initialize-vop_graph_test)
+}
+
+sp {apply*initialize-vop_graph_test
+   (state <s> ^operator <op>)
+   (<op> ^name initialize-vop_graph_test)
+-->
+   (<s> ^name vop_graph_test)
+}
+
