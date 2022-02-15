@@ -40,33 +40,3 @@ sp {apply*make-load-from-file-vop
    (<add-vop> ^op-type load-from-file
               ^filepath |paddle.png|)
 }
-
-
-# Create greyscale nodes
-sp {agent_1*propose*make-greyscale-vop
-   (state <s> ^name agent_1
-              ^svs <svs>)
-   (<svs> ^vsm.vog <vog>)
-   (<vog> ^node <tgt-node>)
-   (<tgt-node> ^op-name << get-from-vsm load-from-file >>
-               ^target -1
-               ^node-id <node-id>)
- -{(<vog> ^node <new-node>)
-   (<new-node> ^op-name greyscale
-               ^target <node-id>)}
--->
-   (<s> ^operator <op> + =)
-   (<op> ^name make-greyscale-vop
-         ^target <node-id>)
-}
-
-sp {apply*make-greyscale-vop
-   (state <s> ^operator <op>
-              ^svs.command <cmd-link>)
-   (<op> ^name make-greyscale-vop
-         ^target <target-id>)
--->
-   (<cmd-link> ^add-vop-node <add-vop>)
-   (<add-vop> ^op-type greyscale
-              ^target <target-id>)
-}
