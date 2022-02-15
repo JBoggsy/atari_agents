@@ -70,3 +70,68 @@ sp {apply*make-greyscale-vop
    (<add-vop> ^op-type greyscale
               ^target <target-id>)
 }
+
+# Create crop-to-roi node
+sp {agent_1*propose*make-crop-to-roi-vop
+   (state <s> ^name agent_1
+              ^svs <svs>)
+   (<svs> ^vsm.vog <vog>)
+   (<vog> ^node <vsm-node>)
+   (<vsm-node> ^op-name get-from-vsm
+               ^node-id <vsm-node-id>)
+ -{(<vog> ^node <n>)
+   (<n> ^op-name crop-to-roi)}
+-->
+   (<s> ^operator <op> + =)
+   (<op> ^name make-crop-to-roi-vop
+         ^target <vsm-node-id>)
+}
+
+sp {apply*make-crop-to-roi-vop
+   (state <s> ^operator <op>
+              ^svs.command <cmd>)
+   (<op> ^name make-crop-to-roi-vop
+         ^target <vsm-node-id>)
+-->
+   (<cmd> ^add-vop-node <add-vop>)
+   (<add-vop> ^op-type crop-to-roi
+              ^x 8
+              ^y 188
+              ^width 144
+              ^height 8
+              ^target <vsm-node-id>)
+}
+
+# Create match-template node
+sp {agent_1*propose*make-match-template-vop
+   (state <s> ^name agent_1
+              ^svs <svs>)
+   (<svs> ^vsm.vog <vog>)
+   (<vog> ^node <roi-node>)
+   (<roi-node> ^op-name crop-to-roi
+               ^node-id <roi-node-id>)
+   (<vog> ^node <paddle-node>)
+   (<paddle-node> ^op-name load-from-file
+               ^node-id <paddle-node-id>)
+ -{(<vog> ^node <n>)
+   (<n> ^op-name match-template)}
+-->
+   (<s> ^operator <op> + =)
+   (<op> ^name make-match-template-vop
+         ^target <roi-node-id>
+         ^template <paddle-node-id>)
+}
+
+sp {apply*make-match-template-vop
+   (state <s> ^operator <op>
+              ^svs.command <cmd>)
+   (<op> ^name make-match-template-vop
+         ^target <roi-node-id>
+         ^template <paddle-node-id>)
+-->
+   (<cmd> ^add-vop-node <add-vop>)
+   (<add-vop> ^op-type match-template
+              ^target <roi-node-id>
+              ^template <paddle-node-id>
+              ^method 0)
+}
