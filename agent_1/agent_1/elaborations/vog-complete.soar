@@ -1,0 +1,53 @@
+sp {elaborations*elaborate*node-has-save
+   (state <s> ^name agent_1
+              ^svs.vsm.vog <vog>)
+   (<vog> ^node <main-node>
+          ^node <save-node>)
+   (<main-node> ^node-id <main-node-id>
+               -^op-name save-to-file)
+   (<save-node> ^op-name save-to-file
+                ^target <main-node-id>)
+-->
+   (<main-node> ^has-save-node true)
+}
+
+sp {elaborations*elaborate*vog-complete
+   (state <s> ^name agent_1
+              ^svs.vsm.vog <vog>)
+   (<vog> ^node <get-vsm-node>
+          ^node <get-paddle-node>
+          ^node <vsm-grey-node>
+          ^node <paddle-grey-node>
+          ^node <roi-node>
+          ^node <match-template-node>
+          ^node <min-max-loc-node>)
+   (<get-vsm-node> ^op-name get-from-vsm
+                   ^node-id <get-vsm-node-id>
+                   ^has-save-node true)
+   (<get-paddle-node> ^op-name load-from-file
+                      ^node-id <get-paddle-node-id>
+                      ^has-save-node true)
+   (<vsm-grey-node> ^op-name greyscale
+                    ^node-id <vsm-grey-node-id>
+                    ^target <get-vsm-node-id>
+                    ^has-save-node true)
+   (<paddle-grey-node> ^op-name greyscale
+                       ^node-id <paddle-grey-node-id>
+                       ^target <get-paddle-node-id>
+                       ^has-save-node true)
+   (<roi-node> ^op-name crop-to-roi
+               ^node-id <roi-node-id>
+               ^target <vsm-grey-node-id>
+               ^has-save-node true)
+   (<match-template-node> ^op-name match-template
+                          ^node-id <match-template-node-id>
+                          ^target <roi-node-id>
+                          ^template <paddle-grey-node-id>
+                          ^has-save-node true)
+   (<min-max-loc-node> ^op-name crop-to-roi
+               ^node-id <min-max-loc-node-id>
+               ^target <match-template-node-id>
+               ^has-save-node true)
+-->
+   (<s> ^vog-complete true)
+}

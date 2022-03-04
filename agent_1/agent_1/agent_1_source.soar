@@ -8,4 +8,5 @@ popd
 source add-save-node.soar
 source initialize-agent_1.soar
 source make-core-vog.soar
+source move-paddle-randomly.soar
 source remove-finished-svs-cmd.soar

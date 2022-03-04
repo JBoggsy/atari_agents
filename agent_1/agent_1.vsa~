@@ -6,8 +6,10 @@ VERSION 4
 3	0	FOLDER elaborations elaborations 4
 4	3	FOPERATOR _all _all.soar 5
 5	3	FOPERATOR top-state top-state.soar 6
-6	0	OPERATOR add-save-node add-save-node.soar 7
-7	0	OPERATOR initialize-agent_1 initialize-agent_1.soar 8
-8	0	OPERATOR make-core-vog make-core-vog.soar 9
-9	0	OPERATOR remove-finished-svs-cmd remove-finished-svs-cmd.soar 10
+6	3	FOPERATOR vog-complete vog-complete.soar 12
+7	0	OPERATOR add-save-node add-save-node.soar 7
+8	0	OPERATOR initialize-agent_1 initialize-agent_1.soar 8
+9	0	OPERATOR make-core-vog make-core-vog.soar 9
+10	0	OPERATOR move-paddle-randomly move-paddle-randomly.soar 13
+11	0	OPERATOR remove-finished-svs-cmd remove-finished-svs-cmd.soar 10
 END
