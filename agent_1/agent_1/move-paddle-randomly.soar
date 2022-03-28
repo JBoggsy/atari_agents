@@ -1,15 +1,40 @@
-#sp {agent_1*propose*move-paddle-randomly
-#   (state <s> ^name agent_1
-#              ^vog-complete true)
-#-->
-#   (<s> ^operator <op> + =)
-#   (<op> ^name move-paddle-randomly)
-#}
-#
-#sp {agent_1*propose*move-paddle-randomly
-#   (state <s> ^name agent_1)
-#-->
-#   (<s> ^operator <op> + =)
-#   (<op> ^name move-paddle-randomly)
-#}
-#
+# Action IDs
+# 2 = move right
+# 3 = move left
+
+sp {agent_1*propose*move-paddle-left
+   (state <s> ^name agent_1
+              ^vog-complete true
+              ^svs.vsm.visual-buffer.newest-update <new_upd>)
+-->
+   (<s> ^operator <op> + =)
+   (<op> ^name move-paddle-left)
+}
+
+sp {agent_1*propose*move-paddle-right
+   (state <s> ^name agent_1
+              ^vog-complete true
+              ^svs.vsm.visual-buffer.newest-update <new_upd>)
+-->
+   (<s> ^operator <op> + =)
+   (<op> ^name move-paddle-right)
+}
+
+sp {apply*move-paddle-left
+   (state <s> ^operator <op>
+              ^io.output-link <out>)
+   (<op> ^name move-paddle-left)
+-->
+   (<out> ^take-action <act>)
+   (<act> ^action-id 3)
+}
+
+sp {apply*move-paddle-right
+   (state <s> ^operator <op>
+              ^io.output-link <out>)
+   (<op> ^name move-paddle-right)
+-->
+   (<out> ^take-action <act>)
+   (<act> ^action-id 2)
+}
+

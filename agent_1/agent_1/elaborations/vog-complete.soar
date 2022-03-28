@@ -44,10 +44,11 @@ sp {elaborations*elaborate*vog-complete
                           ^target <roi-node-id>
                           ^template <paddle-grey-node-id>
                           ^has-save-node true)
-   (<min-max-loc-node> ^op-name crop-to-roi
+   (<min-max-loc-node> ^op-name min-max-loc
                ^node-id <min-max-loc-node-id>
                ^target <match-template-node-id>
                ^has-save-node true)
 -->
    (<s> ^vog-complete true)
 }
+
